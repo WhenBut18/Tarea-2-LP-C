@@ -6,7 +6,6 @@ typedef struct Mano
     void ** carta;
     int disponibles;
 } Mano;
-
 extern Mano Cartas;
 void inicializarMazo();
 void mostrarMazo();
