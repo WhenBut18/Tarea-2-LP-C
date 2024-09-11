@@ -7,13 +7,11 @@ void *** tablero = NULL;
 Barco * barcos = NULL;
 int tamanoActual;
 int barcosActual;
-int barcosTotal;
 
 void inicializarAux(int cantBarcos, int cantS, int cantM, int cantL, int cantX){
-    barcosActual = cantBarcos;
-    barcosTotal = 0;
-    barcos = (Barco*) malloc(barcosActual * sizeof(Barco));   
-    for (int i = 0; i < barcosActual; i++){
+    barcosActual = 0;
+    barcos = (Barco*) malloc(cantBarcos * sizeof(Barco));   
+    for (int i = 0; i < cantBarcos; i++){
         barcos[i].HP = 0;
     }
     for(int i = 0; i < cantS; i++){
@@ -81,18 +79,19 @@ void eliminarTablero(){
     free(tablero); // Libera la memoria del tablero
 }
 void generadorBarcoAux(int cantX, int cantY, int size, int valorX, int valorY){
-    barcos[barcosTotal].posicionX = (int *) malloc(cantX * sizeof(int));
-    barcos[barcosTotal].posicionY = (int *) malloc(cantY * sizeof(int));
-    barcos[barcosTotal].HP = size;
-    barcos[barcosTotal].tamano = size;
+    barcos[barcosActual].posicionX = (int *) malloc(cantX * sizeof(int));
+    barcos[barcosActual].posicionY = (int *) malloc(cantY * sizeof(int));
+    barcos[barcosActual].HP = size;
+    barcos[barcosActual].tamano = size;
     for (int i = 0; i < cantX; i++){
-        barcos[barcosTotal].posicionX[i] = valorX + i;
-        printf("X: %d\n", barcos[barcosTotal].posicionX[i]);
+        barcos[barcosActual].posicionX[i] = valorX + i;
+        printf("X: %d\n", barcos[barcosActual].posicionX[i]);
     }
     for (int i = 0; i < cantY; i++){
-        barcos[barcosTotal].posicionY[i] = valorY + i;
-        printf("Y: %d\n", barcos[barcosTotal].posicionY[i]);
+        barcos[barcosActual].posicionY[i] = valorY + i;
+        printf("Y: %d\n", barcos[barcosActual].posicionY[i]);
     }
+    barcosActual++;
 }
 void generadorBarco(char Tipo, int seed){
     srand(seed);

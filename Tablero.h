@@ -4,7 +4,6 @@
 extern void *** tablero;
 extern int tamanoActual;
 extern int barcosActual;
-extern int barcosTotal;
 typedef struct Barco{
     int HP;
     int tamano;

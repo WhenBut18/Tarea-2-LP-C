@@ -5,6 +5,7 @@
 
 int main(int argc, char const *argv[]){
     int eleccion;
+    /*
     printf("Seleccione la Dificultad:\n1.- Facil\n2.- Medio\n3.- Dificil\nElija un numero: ");
     scanf("%d", &eleccion);
     switch (eleccion)
@@ -25,5 +26,7 @@ int main(int argc, char const *argv[]){
         eliminarTablero();
         break;
     }
+    */
+    inicializarMazo();
     return 0;
 }
