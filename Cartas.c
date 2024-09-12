@@ -24,11 +24,63 @@ mostrarMazo(){
     
 }
 */
-void * disparoSimple(int x, int y){
-    if ()
-    for (int i = 0; i < barcosActual; i++){
-        
+void * disparoAleatorio(int probS,int probG, int probL, int probR, int probKG, int seed){
+    srand(seed + probS + probG + probL);
+    int dado = (rand() % 101) + 1;
+    if (probKG == 0){
+        if (dado > 0 && dado <= probS){
+            return (void*)disparoSimple;
+        } else if (dado > probS && dado <= probS + probG){
+            return (void*)disparoGrande;
+        } else if (dado > probS + probG && dado <= probS + probG + probL){
+            return (void*)disparoLineal;
+        } else if (dado > probS + probG + probL && dado <= probS + probG + probL + probR){
+            return (void*)disparoRadar;
+        } else {
+            printf("ERROR PORCENTUAL");
+        }
+    } else {
+        if (dado > 0 && dado <= probS){
+            return (void*)disparoSimple;
+        } else if (dado > probS && dado <= probS + probG){
+            return (void*)disparoGrande;
+        } else if (dado > probS + probG && dado <= probS + probG + probL){
+            return (void*)disparoLineal;
+        } else if (dado > probS + probG + probL && dado <= probS + probG + probL + probR){
+            return (void*)disparoRadar;
+        } else if (dado > probS + probG + probL + probR && dado <= probS + probG + probL + probR + probKG){
+            if (Cartas.disponibles < 5){
+                disparoAleatorio(probS, probG, probL, probR, probKG, rand()%500);
+            }
+            return (void*)disparo500KG;
+        } else {
+            printf("ERROR PORCENTUAL");
+        }
     }
+    
+    
+}
+void * disparoSimple(int x, int y){
+    for (int i = 0; i < barcosActual; i++){
+        for (int j = 0; j < barcos[i].tamano; j++){
+            if((int *) barcos[i].posicionX[j] == NULL){
+                break;
+            }
+            for (int k = 0; k < barcos[i].tamano; k++){
+                if((int *) barcos[i].posicionY[k] == NULL){
+                    break;
+                }
+                if (barcos[i].posicionX[j] == x && barcos[i].posicionY[k] == y){
+                    printf("IMPACTO CONFIRMADO\n");
+                    *((char *)tablero[y][x]) = 'X';
+                    return disparoAleatorio(65, 20, 5, 10, 0, rand()%500);
+                }  
+            }  
+        }
+    }
+    *((char *)tablero[y][x]) = 'O';
+    printf("DISPARO AL AGUA\n");
+    return disparoAleatorio(65, 20, 5, 10, 0, rand()%500);
 }
 void * disparoGrande(int x, int y){
 

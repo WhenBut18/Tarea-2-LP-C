@@ -9,6 +9,8 @@ typedef struct Barco{
     int tamano;
     int * posicionX;
     int * posicionY;
+    int cantX;
+    int cantY;
 } Barco;
 extern Barco * barcos;
 
@@ -19,4 +21,5 @@ void generadorBarco(char Tipo, int seed);
 int casillaChecker(int x, int y);
 void generadorBarcoAux(int cantX, int cantY, int size, int valorX, int valorY);
 void inicializarAux(int cantBarcos, int cantS, int cantM, int cantL, int cantX);
+void mostrarTableroFinal();
 #endif
